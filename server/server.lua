@@ -1,7 +1,7 @@
 ---------------| Developed by BabyDrill#7768 |---------------
 if Config.ESX.enable then TriggerEvent(Config.ESX.trigger, function(obj) ESX = obj end) end
 
-local TriggerRapina = false
+local TriggerRapina = {}
 
 ESX.RegisterServerCallback('wolf_development:checkitem', function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -21,7 +21,7 @@ AddEventHandler('wolf_development:avviarapina', function(posizione)
 		if #xPlayers >= poli.house_robbery then
 			TriggerClientEvent("wolf_development:cercacasa", src)
 			WolfDev(LangLog.robbery, ConfigS.Webhook.robbery, ConfigS.Webhook.color.robbery)
-			TriggerRapina = true
+			TriggerRapina[scr] = true
 		else
 			TriggerClientEvent('esx:showNotification', src, Lang.police)               
 		end	
@@ -40,7 +40,7 @@ AddEventHandler('wolf_development:cercaoggetto', function()
 	local index = math.random(1, #Config.OggettidaTrovare)
     local oggetto = Config.OggettidaTrovare[index]
 
-	if TriggerRapina == false then
+	if TriggerRapina[source] == false then
 		WolfDev(LangLog.mod.." "..GetCurrentResourceName(), ConfigS.Webhook.anticheat, ConfigS.Webhook.color.anticheat)
 		DropPlayer(source, "[Anti Trigger] Hai provato a chettare con il server sbagliato! BabyDrill on ToP:)")
 	else
@@ -68,7 +68,7 @@ AddEventHandler('wolf_development:allertapolice', function(id, giocatore)
 		TriggerClientEvent('wolf_development:clientpolice', -1, giocatore)
 	end
 	if id == 2 then
-		TriggerRapina = false
+		TriggerRapina[source] = false
 	end
 end)
 
