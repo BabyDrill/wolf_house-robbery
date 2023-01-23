@@ -21,7 +21,7 @@ AddEventHandler('wolf_development:avviarapina', function(posizione)
 		if #xPlayers >= poli.house_robbery then
 			TriggerClientEvent("wolf_development:cercacasa", src)
 			WolfDev(LangLog.robbery, ConfigS.Webhook.robbery, ConfigS.Webhook.color.robbery)
-			TriggerRapina[scr] = true
+			TriggerRapina[src] = true
 		else
 			TriggerClientEvent('esx:showNotification', src, Lang.police)               
 		end	
